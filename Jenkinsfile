@@ -8,7 +8,7 @@ pipeline {
             failFast true //con esto le decimos a que si una en paralelo falla no sigua 
             parallel {
         stage('Clean-test'){
-           when { expression { false } } //con esto nos saltamos toda esta etapa
+//           when { expression { false } } //con esto nos saltamos toda esta etapa
             steps {
               echo 'Testing...'
                 withGradle {
@@ -17,7 +17,7 @@ pipeline {
               }
         }
                 stage('test-pitest'){
-          when { expression { false } } //con esto nos saltamos toda esta etapa
+//          when { expression { false } } //con esto nos saltamos toda esta etapa
             steps {
               echo 'Testing pitest'
                 withGradle {
@@ -41,7 +41,7 @@ pipeline {
             parallel { //con esto ejecutaremos las 2 fases de Analisis (sonar y QA) en parelelo
 
     stage('SonarQube Analysis') {
-        when { expression { false } } //con esta linea se salta el analisis de sonarqube no tengo y lo desactivo
+        when { expression { false } } //con esta linea se salta el analisis de sonarqube que no tengo instalado y lo desactivo
         steps {
           withSonarQubeEnv('local') {
            sh './gradlew sonarqube'
@@ -69,9 +69,9 @@ pipeline {
  }
 }
     stage('Build-Publish') {
-//     when { expression { false } }
+     when { expression { false } }
           steps {
-
+// etapa donde construimos el aplicativo y la imagen, la etiquetamos y la subimos a nuestro registry inseguro
             sh 'docker build . -t 10.250.7.3:5050/joluruba/hello-spring-testing:latest -t 10.250.7.3:5050/joluruba/hello-spring-testing:1.0.${BUILD_NUMBER}'
             withDockerRegistry([url:'http://10.250.7.3:5050', credentialsId:'jenkins-registry2']){
               sh 'docker push --all-tags 10.250.7.3:5050/joluruba/hello-spring-testing'

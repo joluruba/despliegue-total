@@ -8,6 +8,7 @@
    - Recogida del Código y Aplicativo desde Repositorio Git
    - Realización de pruebas con JaCoCo, test y Pitest de Gradle
    - Prueba de analisis con Sonarqube
-   - Contrucción de la App y empaquetado de imagen dinde se despleguará además de subirla a nuestro Registry inseguro de Gitlab
+   - Contrucción de la App y de la imagen donde se despleguará la App
+   - Tagueado con las diferentes etiquetas que necesitemos, nº construccion, latest, dev, etc y subida al Registry inseguro de Gitab
    - Test de Seguridad de imagen con Trivy 
    - Despligue final de la App contenida en la imagen archivada anteriormente en el host remoto utilizando ssh y llave cifrada
