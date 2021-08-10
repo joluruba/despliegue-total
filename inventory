@@ -1,0 +1,5 @@
+sns00 ansible_host=10.250.7.3
+[web]
+host0[1:2] ansible_user=root
+[db]
+host03 ansible_user=root

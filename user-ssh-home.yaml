@@ -1,0 +1,31 @@
+---
+# -- copia el certificado a los host remotos ssl creado con: ssh-keygen -t ed25519 y nombre=app
+- hosts: db
+  #- name: Genera la llave nuevo a partir de la 2.8
+  #  openssh_keypair:
+  #    path: app #crea en esta carpeta las claves privadas y publicas
+  tasks:
+  - name: Create user named app
+    user:
+      name: app
+      home: /home/app # por si quieres cambiar la carpeta home del user
+  - name: Creates directory
+    file:
+      path: /home/app/.ssh
+      state: directory
+      owner: app
+      group: app
+      mode: '0700' #si no tiene esos permisos no usará la clave que contiene
+  - name: copia la llave generada
+    copy:
+      src: app.pub
+      dest: /home/app/.ssh/app.pub
+      owner: app
+      mode: '0600'
+  - name:
+    authorized_key:
+      user: app
+      state: present
+      key: "{{lookup('file', 'app.pub') }}" #busca el fichero y lo hace present dentro del fichero
+      # athorized_keys de ese user app con lo cual podemos conectarnos con ssh sin password
+  

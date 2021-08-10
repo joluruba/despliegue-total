@@ -1,0 +1,22 @@
+---
+- hosts: web
+  tasks:
+    - name: install Apache2
+      apt: # con esto usa el modulo apt de los preinstalados con ansible
+        name: apache2
+        state: present
+    - name: copiar fichero
+      copy:
+        src: ./index.html
+        dest: /var/www/html
+        owner: www-data
+        group: www-data
+        mode: '0750'
+    - name: restart_apache2
+      service: name=apache2 state=restarted
+- hosts: db
+  tasks:
+    - name: install MariaDB
+      apt:
+        name: mariadb-server
+        state: present
