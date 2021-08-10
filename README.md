@@ -1,4 +1,4 @@
-# Ansible-Varios y despliegue-total
+# Ansible ejercicios varios (incluido 1 con roles) y despliegue-total
 ## En este reposito estan las practicas con Ansible y el despligue total con:
 1. Aprovisionamiento con Ansible 
    - Creación-Configuracion de usuario
